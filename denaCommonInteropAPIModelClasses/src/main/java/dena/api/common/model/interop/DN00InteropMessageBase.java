@@ -1,16 +1,15 @@
 package dena.api.common.model.interop;
 
 
-import dena.api.common.model.interop.context.DN00InteropContext;
-import dena.api.common.model.interop.context.DN00InteropProtocol;
-import dena.api.common.model.oids.consent.DN00ConsentOIDs.DN00ConsentOID;
+import dena.api.common.interop.context.DN00InteropContext;
+import dena.api.common.interop.context.DN00InteropProtocol;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import r01f.objectstreamer.annotations.MarshallField;
 
 @Accessors(prefix = "_")
-public abstract class DN00InteropMessageBase<D extends DN00IsInteropMessagePayload>
+public abstract class DN00InteropMessageBase<P>	// PAYLOAD
            implements DN00IsInteropMessage {
 
 	private static final long serialVersionUID = -6514804597587776907L;
@@ -23,11 +22,8 @@ public abstract class DN00InteropMessageBase<D extends DN00IsInteropMessagePaylo
     @MarshallField(as="protocol")
     @Getter @Setter private DN00InteropProtocol _protocol;
 
-    @MarshallField(as="data")
-    @Getter @Setter private D _data;
-    
-    @MarshallField(as="consentOid")
-    @Getter @Setter private DN00ConsentOID _consentOid;
+    @MarshallField(as="payload")
+    @Getter @Setter private P _payload;
 /////////////////////////////////////////////////////////////////////////////////////////
 //	CONSTRUCTOR
 /////////////////////////////////////////////////////////////////////////////////////////    
@@ -36,32 +32,20 @@ public abstract class DN00InteropMessageBase<D extends DN00IsInteropMessagePaylo
 	}
     public DN00InteropMessageBase(final DN00InteropContext context,
 								  final DN00InteropProtocol protocol,
-								  final D data,
-								  final DN00ConsentOID consentOid) {
+								  final P payload) {
 		_context = context;
 		_protocol = protocol;
-		_data = data;
-		_consentOid = consentOid;
+		_payload = payload;
     }
 	public DN00InteropMessageBase(final DN00InteropContext context,
-								  final DN00InteropProtocol protocol,
-								  final D data) {
-		this(context,
-			protocol,	
-			data,
-			null);		// consentOid
-	 }
-	public DN00InteropMessageBase(final DN00InteropContext context,
-								  final D data) {
+								  final P payload) {
 		this(context,
 			null,		// protocol
-			data,
-			null);		// consentOid
-	 }
-	public DN00InteropMessageBase(final D data) {
+			payload);
+	}
+	public DN00InteropMessageBase(final P payload) {
 		this(null,		// context
 			 null,		// protocol
-			 data,
-			 null);		// consentOid
-	 }
+			 payload);	// consentOid
+	}
 }

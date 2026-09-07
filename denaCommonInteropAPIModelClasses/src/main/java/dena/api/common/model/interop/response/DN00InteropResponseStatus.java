@@ -31,18 +31,18 @@ public enum DN00InteropResponseStatus
 /////////////////////////////////////////////////////////////////////////////////////////
     public static DN00InteropResponseStatus fromName(final String name) {
         return EnumExtended.fromName(name,DN00InteropResponseStatus.class)
-                .orElseThrow(() -> new IllegalArgumentException("no " + DN00InteropResponseStatus.class + " element with name=" + name));
+                		   .orElseThrow(() -> new IllegalArgumentException("no " + DN00InteropResponseStatus.class + " element with name=" + name));
     }
     public static DN00InteropResponseStatus fromNameOrNull(final String name) {
         return EnumExtended.fromName(name,DN00InteropResponseStatus.class)
-                .orElse(null);
+                		   .orElse(null);
     }
     public static Set<DN00InteropResponseStatus> fromNames(final String... names) {
         if (CollectionUtils.isNullOrEmpty(names)) return null;
         return Stream.of(names)
-                .map(name -> DN00InteropResponseStatus.fromNameOrNull(name))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toUnmodifiableSet());
+	                 .map(name -> DN00InteropResponseStatus.fromNameOrNull(name))
+	                 .filter(Objects::nonNull)
+	                 .collect(Collectors.toUnmodifiableSet());
     }
     public static Set<DN00InteropResponseStatus> asSet() {
         return EnumSet.allOf(DN00InteropResponseStatus.class);

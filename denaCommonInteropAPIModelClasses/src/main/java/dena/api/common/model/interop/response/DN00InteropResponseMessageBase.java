@@ -1,21 +1,18 @@
 package dena.api.common.model.interop.response;
 
+import dena.api.common.interop.context.DN00InteropContext;
+import dena.api.common.interop.context.DN00InteropProtocol;
 import dena.api.common.model.interop.DN00InteropMessageBase;
-import dena.api.common.model.interop.DN00IsInteropMessage;
-import dena.api.common.model.interop.DN00IsInteropMessagePayload;
-import dena.api.common.model.interop.context.DN00InteropContext;
-import dena.api.common.model.interop.context.DN00InteropProtocol;
-import dena.api.common.model.interop.oids.DN00InteropIDs.DN00InteropResponseStatusCode;
-import dena.api.common.model.oids.consent.DN00ConsentOIDs.DN00ConsentOID;
+import dena.api.common.model.oids.interop.DN00InteropIDs.DN00InteropResponseStatusCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import r01f.objectstreamer.annotations.MarshallField;
 
 @Accessors(prefix = "_")
-public abstract class DN00InteropResponseBase<D extends DN00IsInteropMessagePayload>
-			  extends DN00InteropMessageBase<D>
-           implements DN00IsInteropMessage {
+public abstract class DN00InteropResponseMessageBase<P>
+			  extends DN00InteropMessageBase<P>
+           implements DN00IsInteropResponseMessage {
 
 	 private static final long serialVersionUID = -8193992284627836006L;
 //////////////////////////////////////////////////////////////////////////////
@@ -41,31 +38,22 @@ public abstract class DN00InteropResponseBase<D extends DN00IsInteropMessagePayl
 /////////////////////////////////////////////////////////////////////////////////////////
 //	CONSTRUCTOR
 /////////////////////////////////////////////////////////////////////////////////////////    
-    public DN00InteropResponseBase() {
+    public DN00InteropResponseMessageBase() {
 		// default no-args constructor
     }
-    public DN00InteropResponseBase(final DN00InteropContext context,
-								   final DN00InteropProtocol protocol,
-								   final D data,
-								   final DN00ConsentOID consentOid) {
-    	super(context,
-    		  protocol,
-    		  data,
-    		  consentOid);
-    }
-    public DN00InteropResponseBase(final DN00InteropContext context,
-								   final DN00InteropProtocol protocol,
-								   final D data) {
+    public DN00InteropResponseMessageBase(final DN00InteropContext context,
+								   		  final DN00InteropProtocol protocol,
+								   		  final P data) {
 		super(context,
 			  protocol,
 			  data);	
 	}
-    public DN00InteropResponseBase(final DN00InteropContext context,
-								   final D data) {
+    public DN00InteropResponseMessageBase(final DN00InteropContext context,
+								   		  final P data) {
     	super(context,
 			  data);
     }
-    public DN00InteropResponseBase(final D data) {
+    public DN00InteropResponseMessageBase(final P data) {
     	super(data);
     }
 }
